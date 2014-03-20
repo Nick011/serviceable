@@ -221,11 +221,13 @@ module Serviceable
                     @collection = @collection.includes(assoc)
                   end
                   if op==:gt
-                    @collection = @collection.where("#{assoc}.#{target_column} > ?",value)
+                    @collection = @collection.where("#{assoc}.#{target_column} > ?", value)
                   elsif op==:lt
-                    @collection = @collection.where("#{assoc}.#{target_column} < ?",value)
+                    @collection = @collection.where("#{assoc}.#{target_column} < ?", value)
                   elsif op==:in
-                    @collection = @collection.where("#{assoc}.#{target_column} IN (?)",value.split(','))
+                    @collection = @collection.where("#{assoc}.#{target_column} IN (?)", value.split(','))
+                  elsif op==:like
+                    @collection = @colletion.where("#{assoc}.#{target_column} LIKE ?", value)
                   end
                 end
               end  
