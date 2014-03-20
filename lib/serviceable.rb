@@ -227,7 +227,7 @@ module Serviceable
                   elsif op==:in
                     @collection = @collection.where("#{assoc}.#{target_column} IN (?)", value.split(','))
                   elsif op==:like
-                    @collection = @colletion.where("#{assoc}.#{target_column} LIKE ?", value)
+                    @collection = @collection.where("#{assoc}.#{target_column} LIKE ?", value)
                   end
                 end
               end  
