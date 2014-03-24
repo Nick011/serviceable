@@ -229,6 +229,8 @@ module Serviceable
                     @collection = @collection.where("#{assoc}.#{target_column} IN (?)", value.split(','))
                   elsif op==:like
                     @collection = @collection.where("#{assoc}.#{target_column} LIKE ?", "%#{value}%")
+                  elsif op==:limit
+                    @collection = @collection.limit(value)
                   end
                 end
               end  
