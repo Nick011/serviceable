@@ -116,7 +116,7 @@ module Serviceable
       # the developer
       define_method("merge_options") do |options={}|
         merged_options = {}
-        for key in [:only, :except]
+        for key in [:only, :except, :limit]
           opts = {key => params[key]} if params[key]
           merged_options = merged_options.merge(opts) if opts
         end
@@ -131,6 +131,7 @@ module Serviceable
             opts = {}
             opts[:only] = values[:only] if values[:only]
             opts[:except] = values[:except] if values[:except]
+            opts[:limit] = values[:limit] if values[:limit]
             whitelisted_includes[k] = opts
           end
         end
