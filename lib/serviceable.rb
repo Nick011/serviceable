@@ -116,7 +116,7 @@ module Serviceable
       # the developer
       define_method("merge_options") do |options={}|
         merged_options = {}
-        for key in [:only, :except, :limit]
+        for key in [:only, :except, :first]
           opts = {key => params[key]} if params[key]
           merged_options = merged_options.merge(opts) if opts
         end
@@ -131,7 +131,7 @@ module Serviceable
             opts = {}
             opts[:only] = values[:only] if values[:only]
             opts[:except] = values[:except] if values[:except]
-            opts[:limit] = values[:limit] if values[:limit]
+            opts[:first] = values[:first] if values[:first]
             whitelisted_includes[k] = opts
           end
         end
@@ -229,8 +229,8 @@ module Serviceable
                     @collection = @collection.where("#{assoc}.#{target_column} IN (?)", value.split(','))
                   elsif op==:like
                     @collection = @collection.where("#{assoc}.#{target_column} LIKE ?", "%#{value}%")
-                  elsif op==:limit
-                    @collection = @collection.limit(value)
+                  elsif op==:first
+                    @collection = @collection.first(value)
                   end
                 end
               end  
